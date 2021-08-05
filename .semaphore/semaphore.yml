@@ -11,4 +11,4 @@ blocks:
         - name: docker build
           commands:
             - checkout
-            - docker build -t your-image .
+            - docker build -t essanpupil/jenkins-docker-slave .
