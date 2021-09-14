@@ -28,7 +28,7 @@ COPY .ssh/authorized_keys /home/jenkins/.ssh/authorized_keys
 
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/ && \
     chown -R jenkins:jenkins /home/jenkins/.ssh/
-
+RUN git clone http://bitbucket-il:7990/scm/phy-5g/phy_rel.git
 # Standard SSH port
 EXPOSE 22
 
