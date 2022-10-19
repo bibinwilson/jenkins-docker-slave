@@ -17,7 +17,7 @@ RUN apt-get update && \
 # Cleanup old packages
     apt-get -qy autoremove && \
 # Add user jenkins to the image
-    adduser --quiet jenkins && \
+    adduser jenkins --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:jenkins" | chpasswd && \
     mkdir /home/jenkins/.m2
