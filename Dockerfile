@@ -1,4 +1,9 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
+ENV TZ=Asia/Kolkata \
+    DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -qy tzdata
 
 LABEL maintainer="Bibin Wilson <bibinwilsonn@gmail.com>"
 
@@ -10,14 +15,14 @@ RUN apt-get update && \
     apt-get install -qy openssh-server && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd && \
-# Install JDK 8 (latest stable edition at 2019-04-01)
-    apt-get install -qy openjdk-8-jdk && \
+# Install JDK 11
+    apt-get install -qy openjdk-11-jdk && \
 # Install maven
     apt-get install -qy maven && \
 # Cleanup old packages
     apt-get -qy autoremove && \
 # Add user jenkins to the image
-    adduser --quiet jenkins && \
+    adduser jenkins --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:jenkins" | chpasswd && \
     mkdir /home/jenkins/.m2
